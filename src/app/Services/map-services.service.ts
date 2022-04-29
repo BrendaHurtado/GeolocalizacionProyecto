@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {LngLatLike, Map} from 'mapbox-gl';
+import { LngLatLike, Map, Marker } from 'mapbox-gl';
 import { IPlacesResponse, Feature } from '../Interfaces/IPlaces';
 import { PlacesApiClient } from '../api';
 
@@ -12,6 +12,7 @@ export class MapServicesService {
   private map?:Map;
   public isLoadingPlaces:boolean = false;
   public places:Feature[]=[];
+  private markers:Marker[]=[];
 
   constructor(private placesApi:PlacesApiClient) { 
     this.getUserLocation();
@@ -48,7 +49,6 @@ export class MapServicesService {
 
   flyTo(lng:number, lat:number){
 
-    if(this.isMapReady) throw Error('El mapa no esta inicializado');
     this.map?.flyTo({
       zoom:14,
       center:{
@@ -61,6 +61,11 @@ export class MapServicesService {
 
   }
   getPlacesByQuery(query:string = ''){
+    if(query.length ===0){
+      this.places =[];
+      this.isLoadingPlaces = false;
+      return;
+    }
     this.isLoadingPlaces = true;
     this.placesApi.get<IPlacesResponse>(`/${query}.json`,{
       params:{
