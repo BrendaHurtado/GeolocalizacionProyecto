@@ -81,5 +81,8 @@ export class MapServicesService {
       });
 
   }
+  createMarkersFromPlaces(places: Feature[]){
+    
+  }
 
 }
