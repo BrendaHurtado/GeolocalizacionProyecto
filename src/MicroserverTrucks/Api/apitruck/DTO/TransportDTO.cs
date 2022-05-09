@@ -1,6 +1,6 @@
-namespace apitruck.Models;
-public class Transport{
-
+namespace apitruck.DTO;
+public class TransportDTO{
+  
   public int Id {get; set;}
   public string Placa {get; set;}
   public string Serie {get; set;}
@@ -12,12 +12,4 @@ public class Transport{
   public int RoutesId {get; set;}
 
   public int Stock {get; set;}
-
-  // Relacion de 1 a muchos
-  public int TypeTransportId {get; set;}
-  public TypeTransport typeTransport {get; set;}
-
-  // Propiedades de Navegacion
-  public List<TransportEncargado> camionEncargados {get;set;}
-
 }

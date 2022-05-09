@@ -25,11 +25,6 @@ public class GenericRepository<T>:IGenericRepository<T> where T : class{
 
   }
 
-  public async Task<IEnumerable<T>> All()
-  {
-    return await _dbSet.ToListAsync();
-  }
-
   public async Task<T> GetById(int id)
   {
     return await _dbSet.FindAsync(id);
@@ -59,4 +54,20 @@ public class GenericRepository<T>:IGenericRepository<T> where T : class{
   {
     throw new NotImplementedException();
   }
+
+  public virtual Task<IEnumerable<T>> All()
+  {
+    throw new NotImplementedException();
+  }
+  public virtual Task<List<TransportTypeDTO>> GetTypeTransport(int id)
+  {
+    throw new NotImplementedException();
+  }
+
+
+  public virtual Task<bool> PutTruck(int idruta, PutTruckPackage putTruckPackage)
+  {
+    throw new NotImplementedException();
+  }
+
 }

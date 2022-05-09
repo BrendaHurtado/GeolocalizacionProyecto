@@ -68,19 +68,19 @@ public class StartUp
     // Proxies
     services.AddHttpClient<ITrucksProxy,TrucksProxy>();
 
-
-    // configuando cors
+     // configuando cors
     services.AddCors(opciones =>
     {
       opciones.AddDefaultPolicy(builder =>
           {
-          builder.WithOrigins("https://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+          builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
         });
     });
-
     services.AddScoped<IUnitOfWork, UnitOfWork>();
+    // Servicios del Email
+    services.AddTransient<IEmailSender,EmailSender>();
+    services.Configure<EmailSenderOptions>(Configuration.GetSection("EmailSenderOptions"));
   }
-
 
   public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
   {

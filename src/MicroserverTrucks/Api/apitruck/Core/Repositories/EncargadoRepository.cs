@@ -3,7 +3,6 @@ using apitruck.Data;
 using apitruck.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.DataProtection;
-using apitruck.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using apitruck.DTO;
 
@@ -44,5 +43,8 @@ public class EncargadoRepository : GenericRepository<Encargado>,IEncargadoReposi
       return new EncargadoCamionDTO();
     }
   }
-  
+  public override async Task<bool> Add(Encargado entity){
+     await _dbSet.AddAsync(entity);
+     return true;
+  }
 }

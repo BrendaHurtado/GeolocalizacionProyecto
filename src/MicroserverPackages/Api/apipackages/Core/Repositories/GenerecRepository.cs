@@ -23,10 +23,7 @@ public class GenericRepository<T> : IGenericRepository<T>  where T : class{
     this._mapper = mapper;
   }
 
-  public virtual async Task<IEnumerable<T>> All()
-  {
-    return await dbSet.ToListAsync();
-  }
+
 
   public virtual async Task<T> GetById(int id)
   {
@@ -45,6 +42,16 @@ public class GenericRepository<T> : IGenericRepository<T>  where T : class{
   }
 
   public virtual Task<bool> Upsert(T entity)
+  {
+    throw new NotImplementedException();
+  }
+
+  public  virtual Task<IEnumerable<T>> All()
+  {
+    throw new NotImplementedException();
+  }
+
+  public virtual Task<string> GetEmailUser(int idroute)
   {
     throw new NotImplementedException();
   }

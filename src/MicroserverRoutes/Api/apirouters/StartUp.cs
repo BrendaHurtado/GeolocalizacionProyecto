@@ -73,7 +73,7 @@ public class StartUp
         opciones.AddPolicy("ClientPermission",policy =>{
           policy.AllowAnyHeader()
             .AllowAnyMethod()
-            .WithOrigins("http://localhost:3000")
+            .WithOrigins("http://localhost:4200")
             .AllowCredentials();
         });
     });

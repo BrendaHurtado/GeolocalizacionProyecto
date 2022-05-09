@@ -35,13 +35,16 @@ public class RoutesController:ControllerBase{
 
   [HttpPost]
   public async Task<ActionResult>PostRoutes(CreateNewPackageDTO createNewPackageDTO){
-
     if(ModelState.IsValid){
+      
       var newroutes = _mapper.Map<Routes>(createNewPackageDTO);
       newroutes.coordinatesId = createNewPackageDTO.IdCoordinates;
 
       await _unitofwork.Routes.Add(newroutes);
       await _unitofwork.CompleteAsync();
+
+      // aqui vamos a ponwer el id nuevo
+      createNewPackageDTO.IdRuta = newroutes.Id;
 
       // Aqui nos comunicamos con el microservice de paquetes
       await _routesProxy.InsertPackage(createNewPackageDTO);
@@ -50,12 +53,5 @@ public class RoutesController:ControllerBase{
       return CreatedAtAction("GetItem", new {id = newroutes.Id}, createNewPackageDTO);    
     }
     return new JsonResult("Fail"){StatusCode=500};
-  }
-
-
-
-
-
-
-  
+  }  
 }

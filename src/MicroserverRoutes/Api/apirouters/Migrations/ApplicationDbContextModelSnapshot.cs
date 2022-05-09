@@ -67,12 +67,17 @@ namespace apirouters.Migrations
             modelBuilder.Entity("apirouters.Models.Routes", b =>
                 {
                     b.HasOne("apirouters.Models.Coordinates", "coordinates")
-                        .WithMany()
+                        .WithMany("Routes")
                         .HasForeignKey("coordinatesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("coordinates");
+                });
+
+            modelBuilder.Entity("apirouters.Models.Coordinates", b =>
+                {
+                    b.Navigation("Routes");
                 });
 #pragma warning restore 612, 618
         }

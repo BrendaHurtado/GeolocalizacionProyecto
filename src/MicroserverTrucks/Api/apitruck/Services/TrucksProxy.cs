@@ -26,4 +26,15 @@ public class TrucksProxy : ITrucksProxy
     }
     return new RoutesCoordenatesDTO();
   }
+  
+  public async Task<string> GetitBackEmail(int idroute)
+  {
+    var request = await _httpClient.GetAsync(string.Format(_apiUrls.PackageUrl+"v1/package/user/email/{0}",idroute));
+    if(request.IsSuccessStatusCode){
+      var respuestaString = await request.Content.ReadAsStringAsync();
+      var emailuser = JsonSerializer.Deserialize<string>(respuestaString, new JsonSerializerOptions(){PropertyNameCaseInsensitive =true});
+    }
+    return "";
+  }
+
 }

@@ -28,6 +28,19 @@ namespace apitruck.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Types",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    nametype = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Types", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Trucks",
                 columns: table => new
                 {
@@ -40,11 +53,19 @@ namespace apitruck.Migrations
                     Modelo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Plazas = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    RoutesId = table.Column<int>(type: "int", nullable: false)
+                    RoutesId = table.Column<int>(type: "int", nullable: false),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    TypeTransportId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trucks", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Trucks_Types_TypeTransportId",
+                        column: x => x.TypeTransportId,
+                        principalTable: "Types",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -75,6 +96,11 @@ namespace apitruck.Migrations
                 name: "IX_CamionEncargados_TruckId",
                 table: "CamionEncargados",
                 column: "TruckId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Trucks_TypeTransportId",
+                table: "Trucks",
+                column: "TypeTransportId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -87,6 +113,9 @@ namespace apitruck.Migrations
 
             migrationBuilder.DropTable(
                 name: "Trucks");
+
+            migrationBuilder.DropTable(
+                name: "Types");
         }
     }
 }

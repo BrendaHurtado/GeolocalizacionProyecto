@@ -11,7 +11,7 @@ using apirouters.Data;
 namespace apirouters.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220414073259_initial")]
+    [Migration("20220509024314_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,12 +69,17 @@ namespace apirouters.Migrations
             modelBuilder.Entity("apirouters.Models.Routes", b =>
                 {
                     b.HasOne("apirouters.Models.Coordinates", "coordinates")
-                        .WithMany()
+                        .WithMany("Routes")
                         .HasForeignKey("coordinatesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("coordinates");
+                });
+
+            modelBuilder.Entity("apirouters.Models.Coordinates", b =>
+                {
+                    b.Navigation("Routes");
                 });
 #pragma warning restore 612, 618
         }

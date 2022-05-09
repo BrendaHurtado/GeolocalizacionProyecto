@@ -9,12 +9,18 @@ public class AutoMapperProfile:Profile{
     // origen a destino
 
     // Camion
-    CreateMap<CreateCamionDTO,Truck>();
+    CreateMap<CreateCamionDTO,Transport>();
     CreateMap<Encargado,EncargadoDTO>();
     CreateMap<Encargado,EncargadoCamionDTO>()
       .ForMember(encargadodto =>encargadodto.trucks, opciones => opciones.MapFrom(MapEncargadoCamionDTO));
+    CreateMap<Encargado,TransportDTO>();
 
+    CreateMap<PutTruckPackage,Transport>();
 
+    // Type Transport 
+    CreateMap<CreateTypeTransport,TypeTransport>();
+    CreateMap<TypeTransport,TransportTypeDTO>();
+    CreateMap<Transport,TransportDTO>();
 
     // Encargado
     CreateMap<CreateEncargadoDTO,Encargado>()
@@ -34,19 +40,15 @@ public class AutoMapperProfile:Profile{
       });
     }
     return resultado;
-
   }
+  private List<TransportEncargado>MapCamionEncargados(CreateEncargadoDTO createEncargadoDTO, Encargado encargado){
 
-
-
-  private List<CamionEncargado>MapCamionEncargados(CreateEncargadoDTO createEncargadoDTO, Encargado encargado){
-
-    var resultado = new List<CamionEncargado>();
+    var resultado = new List<TransportEncargado>();
     if(createEncargadoDTO.CamionId == null){
       return resultado;
     }
     foreach(int encargo in createEncargadoDTO.CamionId){
-      resultado.Add( new CamionEncargado{
+      resultado.Add( new TransportEncargado{
         TruckId= encargo,
       });
     }

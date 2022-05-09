@@ -3,6 +3,7 @@ using apipackages.Data;
 using apipackages.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.EntityFrameworkCore;
 
 namespace apipackages.Core.Repositories;
 
@@ -22,8 +23,15 @@ public class PackageRepository: GenericRepository<Package>, IPackage{
       return false;
     }
   }
-
-
-
-
+  public override async Task<IEnumerable<Package>> All()
+  {
+      var packageall = await
+      dbSet.Where(x=> x.EstadoEntrega == false && x.IdRuta !=0)
+      .ToListAsync();
+      return packageall;
+  }
+  public override Task<string> GetEmailUser(int idroute)
+  {
+    return base.GetEmailUser(idroute);
+  }
 }

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace apipackages.Migrations
 {
-    public partial class initialpackage : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,7 +23,8 @@ namespace apipackages.Migrations
                     TotalPaquete = table.Column<double>(type: "float", nullable: false),
                     OrigenPaquete = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DestinoPaquete = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdRuta = table.Column<int>(type: "int", nullable: false)
+                    IdRuta = table.Column<int>(type: "int", nullable: false),
+                    IdUser = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

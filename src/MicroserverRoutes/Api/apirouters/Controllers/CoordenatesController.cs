@@ -25,22 +25,19 @@ public class CoordenatesController : ControllerBase
   }
 
   [HttpGet("{id}")]
-  public async Task<ActionResult> GetItem(int id)
-  {
+  public async Task<ActionResult> GetItem(int id){
     var newroutes = await _unitofwork.Coordenate.GetRoutesCoordenates(id);
     return Ok(newroutes);
   }
 
   [HttpPost("enviar/coordenates")]
   public async Task SendCoordenates([FromBody]RoutesTimeDTO routesTimeDTO){
-    Console.WriteLine(routesTimeDTO.latitude+""+routesTimeDTO.longitude);
     await _hubContext.Clients.All.SendAsync("ReceiveMenssage",routesTimeDTO);
   }
 
   // Ruta para insertar Pedidos
   [HttpPost]
-  public async Task<ActionResult> PostCoordenates(CreateNewPackageDTO createNewPackageDTO)
-  {
+  public async Task<ActionResult> PostCoordenates(CreateNewPackageDTO createNewPackageDTO){
     if (ModelState.IsValid)
     {
       var newcoordenates = _mapper.Map<Coordinates>(createNewPackageDTO);
@@ -54,5 +51,6 @@ public class CoordenatesController : ControllerBase
       return CreatedAtAction("GetItem", new { id = newcoordenates.Id }, createNewPackageDTO);
     }
     return new JsonResult("Fail") { StatusCode = 500 };
-  }
+  }  
 }
+

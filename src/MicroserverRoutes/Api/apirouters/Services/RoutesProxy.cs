@@ -4,7 +4,6 @@ using apirouters.DTO;
 using Microsoft.Extensions.Options;
 
 namespace apirouters.Services;
-
 public interface IRoutesProxy{
   Task InsertPackage(CreateNewPackageDTO createPackageDTO);
   Task InsertRoutes(CreateNewPackageDTO createPackageDTO);
@@ -20,7 +19,6 @@ public class RoutesProxy:IRoutesProxy{
   }
   
   public async Task InsertPackage(CreateNewPackageDTO createPackageDTO){
-
     var content = new StringContent(
       JsonSerializer.Serialize(createPackageDTO),
       Encoding.UTF8,
@@ -39,5 +37,4 @@ public class RoutesProxy:IRoutesProxy{
     var request = await _httpClient.PostAsync(_apiUrls.RoutesUrl+"v1/routes",content);
     request.EnsureSuccessStatusCode();
   }
-
 }

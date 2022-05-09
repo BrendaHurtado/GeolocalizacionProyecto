@@ -17,6 +17,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
 
   public ITruckRespository truck {get; private set;}
 
+  public ITypeTransportRepository typeTransport {get; private set;}
 
   public UnitOfWork(ApplicationDbContext  context, ILoggerFactory loggerFactory,IDataProtectionProvider dataProtectionProvider,IMapper mapper)
   {
@@ -26,6 +27,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     _mapper = mapper;
     encargado = new EncargadoRepository(_dbContext,_logger,_dataProtector,_mapper);
     truck = new TruckRepository(_dbContext,_logger,_dataProtector,_mapper);
+    typeTransport = new TypeTransportRepository(_dbContext,_logger,_dataProtector,_mapper);
   }
 
   public async Task CompleteAsync()

@@ -11,7 +11,7 @@ public class Encargado{
   public string Usuario {get; set;}
   public string Password {get; set;}
 
-  public List<CamionEncargado> camionEncargados {get;set;}
+  public List<TransportEncargado> camionEncargados {get;set;}
 
 
 }

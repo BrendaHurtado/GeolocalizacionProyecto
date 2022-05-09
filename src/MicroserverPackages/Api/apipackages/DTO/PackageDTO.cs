@@ -13,7 +13,10 @@ public class CreateNewPackageDTO{
   public string DestinoPaquete{get; set;}
 
   // Propiedades de Routes
+   public int IdRuta {get; set;}
    public int IdCoordinates {get; set;}
+
+   public int IdUser {get; set;}
 
   // propiedades de la tabla Detail Package
 

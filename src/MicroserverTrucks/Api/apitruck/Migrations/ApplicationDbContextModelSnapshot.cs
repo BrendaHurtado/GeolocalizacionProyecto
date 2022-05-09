@@ -21,21 +21,6 @@ namespace apitruck.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("apitruck.Models.CamionEncargado", b =>
-                {
-                    b.Property<int>("EncargadoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TruckId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EncargadoId", "TruckId");
-
-                    b.HasIndex("TruckId");
-
-                    b.ToTable("CamionEncargados");
-                });
-
             modelBuilder.Entity("apitruck.Models.Encargado", b =>
                 {
                     b.Property<int>("Id")
@@ -77,7 +62,7 @@ namespace apitruck.Migrations
                     b.ToTable("Encargados");
                 });
 
-            modelBuilder.Entity("apitruck.Models.Truck", b =>
+            modelBuilder.Entity("apitruck.Models.Transport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -114,12 +99,63 @@ namespace apitruck.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeTransportId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TypeTransportId");
 
                     b.ToTable("Trucks");
                 });
 
-            modelBuilder.Entity("apitruck.Models.CamionEncargado", b =>
+            modelBuilder.Entity("apitruck.Models.TransportEncargado", b =>
+                {
+                    b.Property<int>("EncargadoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TruckId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EncargadoId", "TruckId");
+
+                    b.HasIndex("TruckId");
+
+                    b.ToTable("CamionEncargados");
+                });
+
+            modelBuilder.Entity("apitruck.Models.TypeTransport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("nametype")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Types");
+                });
+
+            modelBuilder.Entity("apitruck.Models.Transport", b =>
+                {
+                    b.HasOne("apitruck.Models.TypeTransport", "typeTransport")
+                        .WithMany("transports")
+                        .HasForeignKey("TypeTransportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("typeTransport");
+                });
+
+            modelBuilder.Entity("apitruck.Models.TransportEncargado", b =>
                 {
                     b.HasOne("apitruck.Models.Encargado", "encargado")
                         .WithMany("camionEncargados")
@@ -127,8 +163,8 @@ namespace apitruck.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("apitruck.Models.Truck", "truck")
-                        .WithMany()
+                    b.HasOne("apitruck.Models.Transport", "truck")
+                        .WithMany("camionEncargados")
                         .HasForeignKey("TruckId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -141,6 +177,16 @@ namespace apitruck.Migrations
             modelBuilder.Entity("apitruck.Models.Encargado", b =>
                 {
                     b.Navigation("camionEncargados");
+                });
+
+            modelBuilder.Entity("apitruck.Models.Transport", b =>
+                {
+                    b.Navigation("camionEncargados");
+                });
+
+            modelBuilder.Entity("apitruck.Models.TypeTransport", b =>
+                {
+                    b.Navigation("transports");
                 });
 #pragma warning restore 612, 618
         }

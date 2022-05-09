@@ -7,8 +7,13 @@ namespace apitruck.Data;
 public class ApplicationDbContext:DbContext{
 
   public virtual DbSet<Encargado> Encargados {get; set;}
-  public virtual DbSet<Truck> Trucks {get; set;}
-  public virtual DbSet<CamionEncargado> CamionEncargados {get; set;}
+  public virtual DbSet<Transport> Trucks {get; set;}
+
+  public virtual DbSet<TypeTransport> Types {get; set;}
+
+  public virtual DbSet<TransportEncargado> CamionEncargados {get; set;}
+
+
 
   public ApplicationDbContext(DbContextOptions<ApplicationDbContext> dbContextOptions):base(dbContextOptions){
 
@@ -16,7 +21,7 @@ public class ApplicationDbContext:DbContext{
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     base.OnModelCreating(modelBuilder);
-    modelBuilder.Entity<CamionEncargado>().HasKey(al => new {al.EncargadoId,al.TruckId});
+    modelBuilder.Entity<TransportEncargado>().HasKey(al => new {al.EncargadoId,al.TruckId});
   }
 
 }

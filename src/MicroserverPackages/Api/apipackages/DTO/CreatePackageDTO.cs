@@ -13,5 +13,6 @@ public class CreatePackageDTO{
  
   // Relacion de uno a muchos con la tabla ruta
   public int IdRuta {get; set;}
+  public int IdUser {get; set;}
 
 }

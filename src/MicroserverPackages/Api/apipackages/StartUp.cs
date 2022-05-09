@@ -73,7 +73,7 @@ public class StartUp
     {
       opciones.AddDefaultPolicy(builder =>
           {
-          builder.WithOrigins("https://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+          builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
         });
     });
 

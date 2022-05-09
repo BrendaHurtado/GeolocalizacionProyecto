@@ -14,4 +14,14 @@ public class Package{
   // Relacion de uno a muchos con la tabla ruta
   public int IdRuta {get; set;}
 
+  // ID USUARIO
+  public int IdUser {get; set;}
+
+
+  // Propiedades de Navegacion
+  public List<DetailPackage> detailPackages {get; set;}
+
+
+
+
 }

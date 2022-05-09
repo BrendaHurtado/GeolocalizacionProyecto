@@ -12,8 +12,8 @@ using apipackages.Data;
 namespace apipackages.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220407154223_initialpackage")]
-    partial class initialpackage
+    [Migration("20220509024212_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,6 +81,9 @@ namespace apipackages.Migrations
                     b.Property<int>("IdRuta")
                         .HasColumnType("int");
 
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
+
                     b.Property<double>("IvaPaquete")
                         .HasColumnType("float");
 
@@ -102,12 +105,17 @@ namespace apipackages.Migrations
             modelBuilder.Entity("apipackages.Models.DetailPackage", b =>
                 {
                     b.HasOne("apipackages.Models.Package", "Package")
-                        .WithMany()
+                        .WithMany("detailPackages")
                         .HasForeignKey("PackageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Package");
+                });
+
+            modelBuilder.Entity("apipackages.Models.Package", b =>
+                {
+                    b.Navigation("detailPackages");
                 });
 #pragma warning restore 612, 618
         }
