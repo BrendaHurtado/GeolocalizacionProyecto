@@ -6,12 +6,11 @@ export interface CreateNewPackageDTO{
   TotalPaquete:number;
   OrigenPaquete:string;
   DestinoPaquete:string;
-  IdCoordinates:number;
+  IdUser:Number;
   TypePackage:string;
   Description:string;
   PrecioPackage:number;
   CodePackage:string;
-  PackageId:number;
   LatOrigen:number;
   LogOrigen:number;
   LatDestination:number;

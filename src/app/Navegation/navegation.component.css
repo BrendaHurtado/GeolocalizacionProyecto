@@ -44,6 +44,14 @@ body {
   #wrapper.toggled #sidebar-wrapper {
       margin-left: -20rem;
   }
+  #menu-toggle{
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  #menu-toggle{
+    display: block;
+  }
 }
 
 .bg-light {
@@ -51,7 +59,7 @@ body {
 }
 
 .bg-azul {
-  background-color: #722F37;
+  background-color: #23395B;
 }
 
 a {

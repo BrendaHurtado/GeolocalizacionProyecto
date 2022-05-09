@@ -29,9 +29,7 @@ export class AuthComponent implements OnInit {
   public get VerifiContra():Boolean{
     return this.formulario.get('Pass1')!.invalid && this.formulario.get('Pass1')!.touched;
   }
-  public Registro():void{
-    this.router.navigate(['/login/Registro']);
-  }
+  
   public IniciarLogin():void{
     const {Correo, Pass1} = this.formulario.value;
     this.router.navigate(['/Sidebar/sidebar']);
