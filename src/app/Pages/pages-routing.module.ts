@@ -20,6 +20,7 @@ const routes: Routes = [
   {path:'assign/packages', component:AssignPackagesComponent, children:routespackages},
   {path:'create', component:TruckComponent, children:routingtruck},
   {path:'**', redirectTo:'map'}
+  
 ];
 
 @NgModule({
